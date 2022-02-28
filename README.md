@@ -6,3 +6,4 @@ Os Bons Malandros voltaram. Vamos ajudá-los na era da digitalização
 
 Dado o sucesso do seu remake decidimos ajudar a quadrilha mais famosa do país a digitalizar-se.
 
+Vamos criar uma aplicação JAVA / Spring que vai ajudar a organizar as mais recentes conquistas (furtos).
