@@ -35,8 +35,7 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
-import osbonsmalandros.doutorflavio.conversores.DateFormatter;
-import osbonsmalandros.doutorflavio.conversores.TipoFormatter;
+
 
 
 @Configuration
@@ -89,26 +88,7 @@ public class FlavioWebConfig
         return messageSource;
     }
 
-    /*
-     * Add formatter for class {@link thymeleafexamples.stsm.business.entities.Variety}
-     * and {@link java.util.Date} in addition to the one registered by default
-     */
-    @Override
-    public void addFormatters(final FormatterRegistry registry) {
-        super.addFormatters(registry);
-        registry.addFormatter(varietyFormatter());
-        registry.addFormatter(dateFormatter());
-    }
-      @Bean
-    public TipoFormatter varietyFormatter() {
-        return new TipoFormatter();
-    }
 
-
-  @Bean
-    public DateFormatter dateFormatter() {
-        return new DateFormatter();
-    }
 
 
 
