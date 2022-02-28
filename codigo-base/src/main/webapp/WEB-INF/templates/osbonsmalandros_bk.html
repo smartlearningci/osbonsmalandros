@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Spring Thyme Seed Starter Manager</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" tipo="text/css" media="all" href="../../css/stsm.css" th:href="@{/css/stsm.css}"/>
+  </head>
+
+  <body>
+
+    <div>
+      <img src="../../images/stsmlogo.png" alt="STSM logo" title="STSM logo" 
+           th:src="@{/images/stsmlogo.png}" th:alt-title="#{title.application}"/>
+    </div>
+    
+    <div class="pecadeartelist" th:unless="${#lists.isEmpty(todasAsPecasDeArte)}">
+    
+      <h2 th:text="#{title.list}">List of Seed Starters</h2>
+      
+      <table>
+        <thead>
+          <tr>
+            <th th:text="#{pecadearte.dataDoFurto}">Date Planted</th>
+            <th th:text="#{pecadearte.roubada}">Covered</th>
+            <th th:text="#{pecadearte.ambito}">Type</th>
+            <th th:text="#{pecadearte.caracteristicas}">caracteristicas</th>
+            <th th:text="#{pecadearte.rows}">linhas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="pa : ${todasAsPecasDeArte}">
+            <td th:text="${{pa.dataDoFurto}}">13/01/2011</td>
+            <td th:text="#{|bool.${pa.roubada}|}">yes</td>
+            <td th:text="#{|pecadearte.tipo.${pa.tipo}|}">Wireframe</td>
+            <td th:text="${#strings.arrayJoin(
+                             #messages.arrayMsg(
+                               #strings.arrayPrepend(pa.caracteristicas,'pecadearte.caracteristicas.')),
+                             ', ')}">Electric Heating, Turf</td>
+            <td>
+              <table>
+                <tbody>
+                  <tr th:each="row,rowStat : ${pa.rows}">
+                    <td th:text="${rowStat.count}">1</td>
+                    <td th:text="${row.tipo.name}">Thymus Thymi</td>
+                    <td th:text="${row.seedsPerCell}">12</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+
+
+    <div>
+    
+      <h2 th:text="#{title.new}">Adicionar peça de Arte</h2>
+
+      <form action="#" th:action="@{/osbonsmalandors}" th:object="${pecadearte}" method="post">
+    
+        <fieldset>
+          
+          <legend th:text="#{pecadearte.data}">Seed Starter Data</legend>
+
+          <ul th:if="${#fields.hasErrors('*')}" class="errorlist">
+            <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+          </ul>
+
+          
+          <div>
+            <label for="dataDoFurto">
+              <span th:text="#{pecadearte.dataDoFurto}">Date planted</span>
+              (<span th:text="#{date.format}">YYYY/MM/DD</span>)
+            </label>
+            <input tipo="text" th:field="*{dataDoFurto}" th:errorclass="fieldError" />
+          </div>
+          <div>
+            <label th:for="${#ids.next('roubada')}" th:text="#{pecadearte.roubada}">Covered</label>
+            <input tipo="checkbox" th:field="*{roubada}" />
+          </div>
+          <div>
+            <label for="tipo" th:text="#{pecadearte.tipo}">Type</label>
+            <select th:field="*{tipo}">
+              <option th:each="tipo : ${todosOsTipos}" th:value="${tipo}" th:text="#{${'pecadearte.tipo.' + tipo}}">Wireframe</option>
+            </select>
+          </div>
+          <div>
+            <label th:text="#{pecadearte.features}">Features</label>
+            <ul>
+              <li th:each="feat : ${todasAsCaracteristicas}">
+                <input tipo="checkbox" th:field="*{features}" th:value="${feat}" />
+                <label th:for="${#ids.prev('features')}" th:text="#{${'pecadearte.feature.' + feat}}">Electric Heating</label>
+              </li>
+              <li th:remove="all">
+                <input id="removed1" tipo="checkbox" /> <label for="removed1">Turf</label>
+              </li>
+            </ul>
+          </div>
+    
+          <div>
+            <label th:text="#{pecadearte.rows}">Rows</label>
+            <table>
+              <thead>
+                <tr>
+                  <th th:text="#{pecadearte.rows.head.rownum}">Row</th>
+                  <th th:text="#{pecadearte.rows.head.variety}">Variety</th>
+                  <th th:text="#{pecadearte.rows.head.seedsPerCell}">Seeds per cell</th>
+                  <th>
+                    <button tipo="submit" name="addRow" th:text="#{pecadearte.row.add}">Add row</button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="row,rowStat : *{rows}">
+                  <td th:text="${rowStat.count}">1</td>
+                  <td>
+                    <select th:field="*{rows[__${rowStat.index}__].variety}">
+                      <option th:each="var : ${todosOsTipos}" th:value="${var.id}" th:text="${var.name}">Thymus Thymi</option>
+                    </select>
+                  </td>
+                  <td>
+                    <input tipo="text" th:field="*{rows[__${rowStat.index}__].seedsPerCell}" th:errorclass="fieldError" />
+                  </td>
+                  <td>
+                    <button tipo="submit" name="removeRow" th:value="${rowStat.index}" th:text="#{pecadearte.row.remove}">Remove row</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    
+          <div class="submit">
+            <button tipo="submit" name="save" th:text="#{pecadearte.create}">Add Seed Starter</button>    
+          </div>
+        
+        </fieldset>
+          
+      </form>
+        
+    </div>
+
+  </body>
+</html>

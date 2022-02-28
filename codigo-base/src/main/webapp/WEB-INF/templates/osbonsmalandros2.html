@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Basic Bootstrap Template</title>
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<script>
+$(function () { objectFitImages() });
+</script>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a href="#" class="navbar-brand">Tutorial Republic</a>
+			<button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+				<div class="navbar-nav">
+					<a href="#" class="nav-item nav-link active">Home</a>
+					<a href="#" class="nav-item nav-link">Services</a>
+					<a href="#" class="nav-item nav-link">About</a>
+					<a href="#" class="nav-item nav-link">Contact</a>
+				</div>
+				<div class="navbar-nav ms-auto">
+					<a href="#" class="nav-item nav-link">Register</a>
+					<a href="#" class="nav-item nav-link">Login</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<div class="jumbotron jumbotron-fluid bg-dark">
+
+		<div class="jumbotron-background">
+			<img src="https://thumbs.web.sapo.io/?W=775&H=0&delay_optim=1&webp=1&epic=YzMxyGFyGAFFqzTdQl5sWvBDgKkUFE/lDKEHsOvZraUgH0SIXBbeVpMcxO/GX36ib7lICA8MzqVjnUiUD5qmdERgcnkP4YK4mWNIsnOmDr5OLJY=" class="blur ">
+		</div>
+
+		<div class="container text-white">
+
+			<h1 class="display-4">Hello, world!</h1>
+			<p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention
+				to featured content or information.</p>
+			<hr class="my-4">
+			<p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+			<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+
+		</div>
+		<!-- /.container -->
+<style>
+.jumbotron {
+  position:relative;
+  overflow:hidden;
+}
+
+.jumbotron .container {
+  position:relative;
+  z-index:2;
+  
+  background:rgba(0,0,0,0.2);
+  padding:2rem;
+  border:1px solid rgba(0,0,0,0.1);
+  border-radius:3px;
+}
+
+.jumbotron-background {
+  object-fit:cover;
+  font-family: 'object-fit: cover;';
+  position:absolute;
+  top:0;
+  z-index:1;
+  width:100%;
+  height:100%;
+  opacity:0.5;
+}
+
+img.blur {
+	-webkit-filter: blur(4px);
+	filter: blur(4px);
+  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='4');
+
+}
+</style>
+
+	</div>
+	<div class="pecadeartelist" th:unless="${#lists.isEmpty(todasAsPecasDeArte)}">
+
+		<h2 th:text="#{title.list}">Listagem de Roubos e Peças Roubadas</h2>
+
+		<table>
+			<thead>
+				<tr>
+					<th th:text="#{pecadearte.dataDoFurto}">Data do Roubo</th>
+					<th th:text="#{pecadearte.roubada}">Já roubado</th>
+					<th th:text="#{pecadearte.ambito}">Âmbito</th>
+					<th th:text="#{pecadearte.caracteristicas}">Caracteristicas</th>
+					<th th:text="#{pecadearte.pecas}">Peças</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="pa : ${todasAsPecasDeArte}">
+					<td th:text="${{pa.dataDoFurto}}">13/01/2011</td>
+					<td th:text="#{|bool.${pa.roubada}|}">yes</td>
+					<td th:text="#{|pecadearte.ambito.${pa.ambito}|}">Âmbito</td>
+					<td th:text="${#strings.arrayJoin(
+                             #messages.arrayMsg(
+                               #strings.arrayPrepend(pa.caracteristicas,'pecadearte.caracteristicas.')),
+                             ', ')}">Electric Heating, Turf</td>
+					<td>
+						<table>
+							<thead>
+								<tr>
+									<th th:text="#{pecadearte.tipo}">Data do Roubo</th>
+									<th th:text="#{pecadearte.numeroDePecas}">Já roubado</th>
+									<th th:text="#{pecadearte.ambito}">Âmbito</th>
+									<th th:text="#{pecadearte.caracteristicas}">Caracteristicas</th>
+									<th th:text="#{pecadearte.pecas}">Peças</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="row,rowStat : ${pa.pecasDeArte}">
+									<!--<td th:text="${rowStat.count}">1</td>-->
+									<td th:text="${row.tipo.tipo}">Ourivesaria</td>
+									<td th:text="${row.numeroDePecas}">1</td>
+									<td th:text="${row.seculo}">XX</td>
+									<td th:text="${row.autor}">Paula Rego</td>
+									<td th:text="${row.descricaoDaPeca}">Super fixe</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+
+	<div>
+
+		<h2 th:text="#{title.new}">Adicionar peça de Arte</h2>
+
+		<form action="#" th:action="@{/osbonsmalandros}" th:object="${rouboPecasDeArte}" method="post">
+
+			<fieldset>
+
+				<legend th:text="#{pecadearte.novasInformacoes}">Informações do Furto</legend>
+
+				<ul th:if="${#fields.hasErrors('*')}" class="errorlist">
+					<li th:each="err : ${#fields.errors('*')}" th:text="${err}">Valores de entrada incorretos</li>
+				</ul>
+
+
+				<div>
+					<label for="dataDoFurto">
+						<span th:text="#{pecadearte.dataDoFurto}">Data do Roubo</span>
+						(<span th:text="#{date.format}">YYYY/MM/DD</span>)
+					</label>
+					<input type="text" th:field="*{dataDoFurto}" th:errorclass="fieldError" />
+				</div>
+				<div>
+					<label th:for="${#ids.next('roubada')}" th:text="#{pecadearte.roubada}">Já Roubada</label>
+					<input type="checkbox" th:field="*{roubada}" />
+				</div>
+				<div>
+					<label for="ambito" th:text="#{pecadearte.ambito}">Âmbito</label>
+					<select th:field="*{ambito}">
+						<option th:each="ambito : ${todosOsAmbitos}" th:value="${ambito}"
+							th:text="#{${'pecadearte.ambito.' + ambito}}">Âmbito</option>
+					</select>
+				</div>
+				<div>
+					<label th:text="#{pecadearte.caracteristicas}">Características do local</label>
+					<ul>
+						<li th:each="caracteristica : ${todasAsCaracteristicas}">
+							<input type="checkbox" th:field="*{caracteristicas}" th:value="${caracteristica}" />
+							<label th:for="${#ids.next('caracteristicas')}"
+								th:text="#{${'pecadearte.caracteristicas.' + caracteristica}}">Perigosa</label>
+						</li>
+
+						<li th:remove="all">
+							<input id="removed1" type="checkbox" /> <label for="removed1">Turf</label>
+						</li>
+					</ul>
+				</div>
+
+				<div>
+					<label th:text="#{pecadearte.pecas}">Peças de Arte</label>
+					<table>
+						<thead>
+							<tr>
+								<th th:text="#{pecadearte.linhas.cabecalho.numeroDaLinha}">Row</th>
+								<th th:text="#{pecadearte.linhas.cabecalho.tipo}">Tipo</th>
+								<th th:text="#{pecadearte.linhas.cabecalho.numeroDePecas}">Número de Peças</th>
+								<th th:text="#{pecadearte.linhas.cabecalho.seculo}">Século</th>
+								<th th:text="#{pecadearte.linhas.cabecalho.autor}">Autor</th>
+								<th th:text="#{pecadearte.linhas.cabecalho.descricao}">Descrição da Peça</th>
+								<th>
+									<button type="submit" name="addRow"
+										th:text="#{pecadearte.linha.adicionarPeca}">Adicionar peça</button>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="peca,pecaStat : *{pecasDeArte}">
+								<td th:text="${pecaStat.count}">1</td>
+								<td>
+									<select th:field="*{pecasDeArte[__${pecaStat.index}__].tipo}">
+										<option th:each="var : ${todosOsTipos}" th:value="${var.id}"
+											th:text="${var.tipo}">Thymus Thymi</option>
+									</select>
+								</td>
+								<td>
+									<input type="text" th:field="*{pecasDeArte[__${pecaStat.index}__].numeroDePecas}"
+										th:errorclass="fieldError" />
+								</td>
+								<td>
+									<input type="text" th:field="*{pecasDeArte[__${pecaStat.index}__].seculo}"
+										th:errorclass="fieldError" />
+								</td>
+								<td>
+									<input type="text" th:field="*{pecasDeArte[__${pecaStat.index}__].autor}"
+										th:errorclass="fieldError" />
+								</td>
+								<td>
+									<input type="text" th:field="*{pecasDeArte[__${pecaStat.index}__].descricaoDaPeca}"
+										th:errorclass="fieldError" />
+								</td>
+								<td>
+									<button type="submit" name="removeRow" th:value="${pecaStat.index}"
+										th:text="#{pecadearte.linha.removerPeca}">Remover peça</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="submit">
+					<button type="submit" name="save" th:text="#{pecadearte.criar}">Adicionar Peça</button>
+				</div>
+
+			</fieldset>
+
+		</form>
+
+	</div>
+
+</body>
+
+</html>
