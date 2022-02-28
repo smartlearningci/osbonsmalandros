@@ -1,4 +1,4 @@
-# osbonsmalandros
+# Os Bons Malandros
 Os Bons Malandros voltaram. Vamos ajudá-los na era da digitalização
 
 (Para rever todas as aventuras - RTP Play https://www.rtp.pt/programa/episodios/tv/p39809)
