@@ -63,32 +63,7 @@ public class FlavioMainController {
 
     
     
-    @ModelAttribute("todosOsAmbitos")
-    public List<Ambito> populateAmbitos() {
-        return Arrays.asList(Ambito.TODOS);
-    }
-    
-    @ModelAttribute("todasAsCaracteristicas")
-    public List<Caracteristicas> populateFeatures() {
-    	List<Caracteristicas> c=  Arrays.asList(Caracteristicas.TODOS);
-    	return Arrays.asList(Caracteristicas.TODOS);
-    }
-    
-    @ModelAttribute("todosOsTipos")
-    public List<Tipo> populateTipos() {
-        return this.servicoDeTipos.findAll();
-    }
-    
-    @ModelAttribute("todasAsPecasDeArte")
-    public List<RouboPecasDeArte> populatePecasDeArte() {
-        return this.servicoDeRouboDePecasDeArte.findAll();
-    }
-
-
-    @RequestMapping({"/ola"})
-    public String mostraBlank() {
-        return "osbonsmalandros";
-    }
+   
     @RequestMapping({"/","/osbonsmalandros"})
     public String mostraFurtosDePecasDeArte(final RouboPecasDeArte rouboPecasDeArte) {
     	rouboPecasDeArte.setDataDoFurto(Calendar.getInstance().getTime());
@@ -100,8 +75,8 @@ public class FlavioMainController {
         if (bindingResult.hasErrors()) {
             return "osbonsmalandros";
         }
-        this.servicoDeRouboDePecasDeArte.add(rouboPecasDeArte);
-        model.clear();
+
+        
         return "redirect:/osbonsmalandros";
     }
     
@@ -109,16 +84,15 @@ public class FlavioMainController {
     
     @RequestMapping(value="/osbonsmalandros", params={"addRow"})
     public String addRow(final RouboPecasDeArte rouboPecasDeArte, final BindingResult bindingResult) {
-    	rouboPecasDeArte.getPecasDeArte().add(new PecaDeArte());
-        return "osbonsmalandros";
+
+        
     }
     
     
     @RequestMapping(value="/osbonsmalandros", params={"removeRow"})
     public String removeRow(final RouboPecasDeArte rouboPecasDeArte, final BindingResult bindingResult, final HttpServletRequest req) {
-        final Integer rowId = Integer.valueOf(req.getParameter("removeRow"));
-        rouboPecasDeArte.getPecasDeArte().remove(rowId.intValue());
-        return "osbonsmalandros";
+
+        
     }
 
 
