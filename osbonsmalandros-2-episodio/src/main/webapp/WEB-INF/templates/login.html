@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Signin Template for Bootstrap</title>
+
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
+
+	<!-- Bootstrap core CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="css/signin.css" rel="stylesheet">
+
+</head>
+
+<body class="text-center">
+
+	<form class="form-signin"  action="#" th:action="@{/login}" th:object="${malandro}" method="post">
+		<h1 class="h1 mb-5 font-weight-normal" th:text="#{login.splash}">Os Bons Malandros</h1>
+		<h1 class="h3 mb-3 font-weight-normal" th:text="#{login.entrar}">Entrar</h1>
+		<label for="utilizador" class="sr-only" th:text="#{login.utilizador}">Email address</label>
+		<input id="inputEmail" class="form-control" th:field="*{utilizador}" required autofocus />
+		<label for="senha" class="sr-only" th:text="#{login.senha}">Password</label>
+		<input type="password" id="inputPassword" class="form-control" thplaceholder="#{login.senha}"
+			th:field="*{senha}" required />
+		<button class="btn btn-lg btn-primary btn-block" type="submit" name="avancar" th:text="#{login.avancar}">Sign
+			in</button>
+	</form>
+</body>
+
+</html>
