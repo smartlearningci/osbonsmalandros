@@ -52,11 +52,11 @@ public class ServicoDeRouboDePecasDeArte {
     public void add(final RouboPecasDeArte rouboPecasDeArte) {
         this.repositorioDeRoubosDePecasDeArte.add(rouboPecasDeArte);
 
-        for(int i = 0; i < rouboPecasDeArte.getPecasDeArte().size(); i++)
+     /*   for(int i = 0; i < rouboPecasDeArte.getPecasDeArte().size(); i++)
         {
         	rouboPecasDeArte.getPecasDeArte().get(i).setId(i+rouboPecasDeArte.getPecasDeArte().size()*10);
         }
-        repositorioDePecasDeArte.batchUpdateUsingJdbcTemplate(rouboPecasDeArte.getPecasDeArte());
+        repositorioDePecasDeArte.batchUpdateUsingJdbcTemplate(rouboPecasDeArte.getPecasDeArte());*/
     }
     
     
