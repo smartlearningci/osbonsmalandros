@@ -99,22 +99,7 @@ public class FlavioMainController {
         return "osbonsmalandros";
     }
 
-    @RequestMapping({"/","/login"})
-    public String mostraLogin(Malandro malandro) {
-    	malandro = new Malandro();
-        return "login";
-    }
-    @RequestMapping(value="/login", params={"avancar"})
-    public String avancar(final Malandro malandro, final BindingResult bindingResult, final ModelMap model) {
 
-    	if (servicoDeMalandros.verificaUtilizador(malandro))
-    	{
-    		model.clear();
-    		return "redirect:/osbonsmalandros";
-    	}
-    	model.clear();
-        return "redirect:/login";
-    }
     @RequestMapping({"/osbonsmalandros"})
     public String mostraFurtosDePecasDeArte(final RouboPecasDeArte rouboPecasDeArte) {
     	rouboPecasDeArte.setDataDoFurto(Calendar.getInstance().getTime());
