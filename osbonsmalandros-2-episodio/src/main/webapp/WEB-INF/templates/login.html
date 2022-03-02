@@ -21,14 +21,14 @@
 
 <body class="text-center">
 
-	<form class="form-signin"  action="#" th:action="@{/login}" th:object="${malandro}" method="post">
+	<form class="form-signin"  action="#"   method="post">
 		<h1 class="h1 mb-5 font-weight-normal" th:text="#{login.splash}">Os Bons Malandros</h1>
 		<h1 class="h3 mb-3 font-weight-normal" th:text="#{login.entrar}">Entrar</h1>
 		<label for="utilizador" class="sr-only" th:text="#{login.utilizador}">Email address</label>
-		<input id="inputEmail" class="form-control" th:field="*{utilizador}" required autofocus />
+		<input id="inputEmail" class="form-control"  required autofocus />
 		<label for="senha" class="sr-only" th:text="#{login.senha}">Password</label>
-		<input type="password" id="inputPassword" class="form-control" thplaceholder="#{login.senha}"
-			th:field="*{senha}" required />
+		<input type="password" id="inputPassword" class="form-control" th:placeholder="#{login.senha}"
+			 required />
 		<button class="btn btn-lg btn-primary btn-block" type="submit" name="avancar" th:text="#{login.avancar}">Sign
 			in</button>
 	</form>
